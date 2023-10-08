@@ -13,8 +13,9 @@ const getCountryByIdController = async (ID) => {
         },
       },
     });
-    
+
     // Retorna el país encontrado
+    console.log(country)
     return country;
   } catch (error) {
     // Captura y maneja cualquier error que ocurra durante la ejecución

@@ -1,10 +1,18 @@
-const { Country } = require("../db");
+const { Country, TourismActivity } = require("../db");
 
 // Esta función obtiene todos los países de la base de datos.
-async function getAllCountries() {
+async function getAllCountriesController() {
   try {
     // busca todos los países en la base de datos.
-    const allCountries = await Country.findAll();
+    const allCountries = await Country.findAll({
+      include: {
+        model: TourismActivity,
+        attributes: ["difficulty", "duration", "name", "season"],
+        through: {
+          attributes: [], // Esto evita que se incluyan las columnas de la tabla de union (CountryActivities)
+        },
+      },
+    });
     
     // Devuelve la lista de países obtenidos.
     return allCountries;
@@ -16,4 +24,4 @@ async function getAllCountries() {
   }
 }
 
-module.exports = getAllCountries;
+module.exports = getAllCountriesController;

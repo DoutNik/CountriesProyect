@@ -1,13 +1,13 @@
-const { activityModel } = require('../models/TourismActivityModel.js');
+const { TourismActivity } = require('../db')
 
-async function getAllActivities(req, res) {
+async function getAllActivitiesController() {
   try {
-    const activities = await activityModel.findAll();
-    res.json(activities);
+    const activities = await TourismActivity.findAll();
+    return activities;
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'There was an error when obtaining the tourist activities.' });
+    throw new Error('There was an error when obtaining the tourist activities.');
   }
 }
 
-module.exports = getAllActivities;
+module.exports = getAllActivitiesController;

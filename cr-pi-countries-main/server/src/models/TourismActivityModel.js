@@ -11,6 +11,9 @@ module.exports = (sequelize) => { sequelize.define('TourismActivity', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  description: {
+    type: DataTypes.STRING,
+  },
   difficulty: {
     type: DataTypes.INTEGER,
     allowNull: false,

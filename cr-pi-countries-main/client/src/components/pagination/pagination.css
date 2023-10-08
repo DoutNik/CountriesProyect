@@ -1,0 +1,31 @@
+.pagination-conteiner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 30px;
+  gap: 10px;
+  z-index: 9999;
+  left: 46%;
+}
+
+.button-pagination {
+  background-color: rgb(227, 204, 204);
+  border: none;
+  padding: 5px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.button-pagination[disabled] {
+  background-color: aquamarine;
+  cursor: no-drop;
+}
+
+.input-pagination {
+  height: 30px;
+  width: 25px;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 5px;
+}

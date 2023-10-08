@@ -1,0 +1,57 @@
+
+.card-container {
+    border: 2px solid rgba(0, 128, 0, 0.5); 
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s, border-color 0.3s;
+    width: 160px;
+    height: 240px;
+  
+    /* Espacio para la imagen de fondo */
+    background-image: url('C:\Users\BANGHO\OneDrive\Escritorio\CountriesProyect\cr-pi-countries-main\client\src\assets\backgrounds\fondoTarjetaCountries.jpg');
+    background-size: 130% 100%;
+    background-position: center;
+    
+  }
+  
+  .card-container:hover {
+    transform: scale(1.05); /* Hacer un poco más grande en :hover */
+    border-color: navy; /* Cambiar el borde a azul marino en :hover */
+  }
+  
+  /* Eliminar el aspecto de enlace de los textos dentro del Link */
+  .card-container a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  /* Estilos adicionales para los elementos dentro del Link */
+  .card-container h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    margin-top: -10px;
+    color:black;
+
+  }
+  
+  .card-container img {
+    /* Establece el tamaño máximo para la imagen */
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: 120px;
+    /* Ajusta la imagen al centro vertical y horizontalmente */
+    display: block;
+    margin: 0 auto;
+    border: 3px solid black
+  }
+  
+  .card-container p {
+    font-size: 18px;
+    font-weight: 1000;
+    margin: 5px 0;
+    background-color: rgba(234, 241, 234, 0.367);
+    border-radius: 20px;
+  }
+  

@@ -23,6 +23,9 @@ module.exports = (sequelize) => { sequelize.define('Country', {
   flagImage: {
     type: DataTypes.STRING,
   },
+  flagImage2: {
+    type: DataTypes.STRING,
+  },
   continent: {
     type: DataTypes.ARRAY(Sequelize.STRING)
   },
@@ -38,6 +41,8 @@ module.exports = (sequelize) => { sequelize.define('Country', {
   population: {
     type: DataTypes.INTEGER,
   },
+}, {
+  timestamps: false
 });
 }
 
