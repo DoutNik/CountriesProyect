@@ -27,7 +27,7 @@ module.exports = (sequelize) => { sequelize.define('Country', {
     type: DataTypes.STRING,
   },
   continent: {
-    type: DataTypes.ARRAY(Sequelize.STRING)
+    type: DataTypes.STRING
   },
   capital: {
     type: DataTypes.ARRAY(Sequelize.STRING)

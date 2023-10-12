@@ -1,24 +1,23 @@
 const { Country, TourismActivity } = require("../db");
-const { Op } = require('sequelize')
+const { Op } = require("sequelize");
 
 const getCountryByNameController = async (name) => {
-
-    const country = await Country.findAll({
-      where: {
-        name: {
-          [Op.iLike]: `%${name}%`,
-        },
+  const country = await Country.findAll({
+    where: {
+      name: {
+        [Op.iLike]: `%${name}%`,
       },
-      include: {
-        model: TourismActivity,
-        attributes: ["difficulty", "duration", "name", "season"],
-      },
-    });
-    if (country.length >=1) {
-      return country
-    } else{
-      return "No matches found"
-    }
+    },
+    include: {
+      model: TourismActivity,
+      attributes: ["difficulty", "description", "duration", "name", "season"],
+    },
+  });
+  if (country.length >= 1) {
+    return country;
+  } else {
+    throw new Error("No matches found");
   }
+};
 
 module.exports = getCountryByNameController;

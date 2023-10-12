@@ -7,15 +7,12 @@ const getCountryByIdController = async (ID) => {
     const country = await Country.findByPk(ID, {
       include: {
         model: TourismActivity,
-        attributes: ["difficulty", "duration", "name", "season"],
+        attributes: ["difficulty", "description", "duration", "name", "season", "id"],
         through: {
           attributes: [], // Esto evita que se incluyan las columnas de la tabla de union (CountryActivities)
         },
       },
     });
-
-    // Retorna el país encontrado
-    console.log(country)
     return country;
   } catch (error) {
     // Captura y maneja cualquier error que ocurra durante la ejecución

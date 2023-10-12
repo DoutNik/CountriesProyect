@@ -1,0 +1,15 @@
+.home video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta el video para cubrir toda la pantalla sin distorsión */
+    z-index: -1;
+  }
+
+  .home {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Ocupa el 100% de la altura de la pantalla */
+  }

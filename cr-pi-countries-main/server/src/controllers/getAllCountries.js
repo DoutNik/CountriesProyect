@@ -7,20 +7,13 @@ async function getAllCountriesController() {
     const allCountries = await Country.findAll({
       include: {
         model: TourismActivity,
-        attributes: ["difficulty", "duration", "name", "season"],
-        through: {
-          attributes: [], // Esto evita que se incluyan las columnas de la tabla de union (CountryActivities)
-        },
+        attributes: ["difficulty", "description", "duration", "name", "season"],
       },
     });
-    
-    // Devuelve la lista de países obtenidos.
     return allCountries;
   } catch (error) {
-    // En caso de error, registra el error en la consola.
     console.error(error);
-    // Devuelve una respuesta de error
-    throw new Error('There was an error obtaining the countries.');
+    throw new Error("There was an error obtaining the countries.");
   }
 }
 

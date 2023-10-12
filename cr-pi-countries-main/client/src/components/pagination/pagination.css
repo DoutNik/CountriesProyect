@@ -3,29 +3,36 @@
   align-items: center;
   justify-content: center;
   position: fixed;
-  bottom: 30px;
+  bottom: 10px;
+  left: 50%; /* Cambia el valor de left al 50% */
+  transform: translateX(-50%); /* Aplica transform para centrar horizontalmente */
   gap: 10px;
   z-index: 9999;
-  left: 46%;
 }
 
+
 .button-pagination {
-  background-color: rgb(227, 204, 204);
-  border: none;
-  padding: 5px;
+  background-color: rgba(227, 204, 204, 0.7);
+  border: 1px solid rgb(240, 237, 233);
+  padding: 10px;
   border-radius: 15px;
   cursor: pointer;
 }
 
 .button-pagination[disabled] {
-  background-color: aquamarine;
+  background-color: rgba(8, 46, 31, 0.585);
   cursor: no-drop;
+  color: rgb(73, 43, 226);
 }
 
 .input-pagination {
-  height: 30px;
+  height: 20px;
   width: 25px;
   text-align: center;
   border: 1px solid black;
   border-radius: 5px;
+}
+
+.pagination-conteiner p {
+color: white;
 }

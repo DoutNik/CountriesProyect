@@ -3,60 +3,80 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import NavBar from '../../components/navBar/navBar';
+import brazil from "../../assets/music/brazil.mp3"
+import argentina from "../../assets/music/argentina.mp3"
 
-import './detail.css'
+import './detail.css';
 
 export default function DetailPage() {
   const { ID } = useParams();
   const navigate = useNavigate();
   const [country, setCountry] = useState({});
-  const [tourismActivities, setTourismActivities] = useState([]);
+  const [activities, setActivities] = useState([]);
 
   useEffect(() => {
     axios(`http://localhost:3001/countries/${ID}`)
       .then(({ data }) => {
         setCountry(data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error fetching country details:', error);
         navigate('/home');
       });
-
-    axios(`http://localhost:3001/countries/${ID}/activities`)
-      .then(({ data }) => {
-        setTourismActivities(data);
-      })
-      .catch(error => {
-        console.error('Error fetching country activities:', error);
-      });
   }, [ID, navigate]);
 
+  useEffect(() => {
+    setActivities(country.TourismActivities || []);
+  }, [country]);
+
   return (
-    <div className='detail-conteiner' style={{ backgroundImage: `url(${country.flagImage2})` }}>
-      <NavBar/>
+    
+    <div className="detail-conteiner" style={{ backgroundImage: `url(${country.flagImage2})` }}>
+      <NavBar />
+      <audio autoPlay loop>
+  {country.name === 'Brazil' && (
+    <source src={brazil} type="audio/mpeg" />
+  )}
+  {country.name === 'Argentina' && (
+    <source src={argentina} type="audio/mpeg" />
+  )}
+  Tu navegador no soporta la reproducción de audio.
+</audio>
       <div>
-      <h2>{country.name}</h2>
+        <h2>{country.name} <span>(</span>{country.ID}<span>)</span>
+        </h2>
         <h3>Official name: {country.official_name}</h3>
-        <div className='detail-container-row'>
-        <div className='location-detail'>
-          <p>Continent: {country.continent}</p>
-          <p>Capital: {country.capital}</p>
-          <p>Subregion: {country.subregion}</p>
-        </div>
-        <div className='numbers-detail'>
-          <p>Area: {country.area}</p>
-          <p>Population: {country.population}</p>
-        </div>
+
+        <div className="detail-container-row">
+          <div className="location-detail">
+            <p>Continent:<br/> {country.continent}</p>
+            <p>Capital:<br/> {country.capital}</p>
+            <p>Subregion:<br/> {country.subregion}</p>
+          </div>
+          <div className="numbers-detail">
+            <p>Area:<br/> {country.area}</p>
+            <p>Population:<br/> {country.population}</p>
+          </div>
         </div>
       </div>
-      <div>
-        <h4>Tourism Activities:</h4>
-        <ul>
-          {tourismActivities.map(activity => (
-            <li key={activity.id}>{activity.name}</li>
-          ))}
-        </ul>
-      </div>
+      <div className='detail-activities'>
+  <h4>Tourism Activities:</h4>
+  {activities.length > 0 ? (
+    <ul>
+      {activities.map((activity) => (
+        <li className='li-activities' key={activity.id}>
+          <strong>Nombre:</strong> {activity.name}<br />
+          <strong>Descripción:</strong> {activity.description}<br />
+          <strong>Temporada:</strong> {activity.season}<br />
+          <strong>Duración:</strong> {activity.duration}<br />
+          <strong>Dificultad:</strong> {activity.difficulty}
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p>No hay actividades disponibles para este país.</p>
+  )}
+</div>
     </div>
   );
 }

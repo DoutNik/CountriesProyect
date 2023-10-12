@@ -4,13 +4,15 @@ const getCountryByIdHandler = require("../handler/getCountryById")
 const getCountryByNameHandler = require("../handler/getCountryByName")
 const getTourismActivitiesHandler = require("../handler/getTourismActivities")
 const postActivitiesHandler = require("../handler/postActivities")
+const getCountryActivityHandler = require("../handler/getCountryActivity")
 
 const router = Router();
 
 router.get('/countries', getAllCountriesHandler)
 router.get('/countries/name', getCountryByNameHandler)
 router.get('/countries/:ID', getCountryByIdHandler)
-router.post('/tourismActivities', getTourismActivitiesHandler)
-router.get('/tourismActivities', postActivitiesHandler)
+router.get('/tourismActivities', getTourismActivitiesHandler)
+router.post('/tourismActivities', postActivitiesHandler)
+router.get('/countries/:ID/activities', getCountryActivityHandler)
 
 module.exports = router;

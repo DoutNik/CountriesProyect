@@ -1,19 +1,33 @@
-const postActivityController = require("../controllers/postActivities");
+const { Country, TourismActivity } = require("../db");
 
 async function postActivitiesHandler(req, res) {
-  const { name, description, difficulty, duration, season, countries } = req.body;
+  const { name, description, difficulty, duration, season, country } = req.body;
 
   try {
-    if (!name || !description || !difficulty || !duration || !season) {
-      return res.status(400).json({ error: 'Please provide all required fields.' });
-    }
+    let activity = await TourismActivity.create({
+      name,
+      description,
+      difficulty,
+      duration,
+      season,
+    });
+    await activity.setCountries(country);
 
-    const activity = await postActivityController(name, description, difficulty, duration, season, countries);
+    const activityWithCountry = await TourismActivity.findOne({
+      where: { name },
+      attributes: { exclude: ["timestamps"] },
+      include: [
+        {
+          model: Country,
+          through: { attributes: [] }, // exclude the intermediate table attributes
+        },
+      ],
+    });
 
-    return res.status(201).json(activity);
+    res.json(activityWithCountry);
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ error: 'There was an error when creating the tourist activity.' });
+    console.log(error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 }
 

@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 
 
 module.exports = (sequelize) => { sequelize.define('TourismActivity', {
-  ID: {
+  id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
@@ -23,7 +23,7 @@ module.exports = (sequelize) => { sequelize.define('TourismActivity', {
     },
   },
   duration: {
-    type: DataTypes.FLOAT,
+    type: DataTypes.STRING,
   },
   season: {
     type: DataTypes.STRING,

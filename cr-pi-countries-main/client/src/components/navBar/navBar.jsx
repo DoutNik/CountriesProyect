@@ -6,57 +6,57 @@ import logo from "../../assets/logo/logo.jpg"
 export default function Nav() {
  
   return (
-    <div className="container">
-      <div className="navbar">
-        <div className="logo-container">
+    <div className="navbar-container">
+      {/*   <div className="logo-container">
         <img
           src={logo}
           className="logo"
           alt="logo"
           ></img>
-          </div>
+          </div> */}
+      <div className="navbar">
         <ul>
-          <li>
-            <NavLink className="text" to="/About">
-              About
-            </NavLink>
-
-            <span class="line -right"></span>
-            <span class="line -top"></span>
-            <span class="line -left"></span>
-            <span class="line -bottom"></span>
-          </li>
-
           <li>
             <NavLink className="text" to="/home">
               Home
             </NavLink>
 
-            <span class="line -right"></span>
-            <span class="line -top"></span>
-            <span class="line -left"></span>
-            <span class="line -bottom"></span>
+            <span className="line -right"></span>
+            <span className="line -top"></span>
+            <span className="line -left"></span>
+            <span className="line -bottom"></span>
+          </li>
+
+          <li>
+            <NavLink className="text" to="/about">
+              About
+            </NavLink>
+
+            <span className="line -right"></span>
+            <span className="line -top"></span>
+            <span className="line -left"></span>
+            <span className="line -bottom"></span>
           </li>
 
           <li>
             <NavLink className="text" to="/create">
-            create
+            Create
             </NavLink>
 
-            <span class="line -right"></span>
-            <span class="line -top"></span>
-            <span class="line -left"></span>
-            <span class="line -bottom"></span>
+            <span className="line -right"></span>
+            <span className="line -top"></span>
+            <span className="line -left"></span>
+            <span className="line -bottom"></span>
           </li>
 
           <li>
           <NavLink className="text" to="/">
               <span className="logout">Logout</span>
               </NavLink>
-            <span class="line -right"></span>
-            <span class="line -top"></span>
-            <span class="line -left"></span>
-            <span class="line -bottom"></span>
+            <span className="line -right"></span>
+            <span className="line -top"></span>
+            <span className="line -left"></span>
+            <span className="line -bottom"></span>
           </li>
         </ul>
       </div>
