@@ -10,7 +10,14 @@ import {
   GET_COUNTRY_ACTIVITY,
 } from "./action_types";
 
-let initialState = { allCountries: [], countriesCopy: [], allActivities: [], countryActivity: [] };
+let initialState = {
+  allCountries: [],
+  countriesCopy: [],
+  allActivities: [],
+  countryActivity: [],
+  selectedContinent: "",
+  selectedActivity: "",
+};
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
@@ -36,8 +43,8 @@ function rootReducer(state = initialState, action) {
     case GET_COUNTRY_ACTIVITY:
       return {
         ...state,
-        countryActivity: action.payload
-      }
+        countryActivity: action.payload,
+      };
 
     case CREATE_ACTIVITY:
       return {
@@ -65,33 +72,59 @@ function rootReducer(state = initialState, action) {
         allCountries: [...sorted],
       };
 
-    case SET_FILTER_BY_CONTINENT:
-      const countries = state.countriesCopy;
-      const resultFilteredByContinent = countries.filter(
-        (country) => country.continent === action.payload
-      );
-      return {
-        ...state,
-        allCountries: resultFilteredByContinent,
-      };
-
-      case FILTER_BY_ACTIVITY:
-        const toFilter = state.countriesCopy
+      case SET_FILTER_BY_CONTINENT:
+  const resultFilteredByContinent = state.countriesCopy.filter(
+    (country) => country.continent === action.payload
+  );
   
-        return {
-          ...state,
-          allCountries: toFilter.filter((country) => {
-            return country.TourismActivities.some(
-              (activity) => activity.name === action.payload
-            );
-          }),
-        };
+  // Combina el filtro de actividad existente
+  const filteredByActivities = state.selectedActivity
+    ? resultFilteredByContinent.filter((country) =>
+        country.TourismActivities.some(
+          (activity) => activity.name === state.selectedActivity
+        )
+      )
+    : resultFilteredByContinent;
 
-    case RESET:
-      return {
-        ...state,
-        allCountries: state.countriesCopy,
-      };
+  return {
+    ...state,
+    allCountries: filteredByActivities,
+    selectedContinent: action.payload,
+  };
+      
+        case FILTER_BY_ACTIVITY:
+  const selectedActivity = action.payload;
+  const selectedContinent = state.selectedContinent;
+  let filteredCountries = state.countriesCopy;
+
+  if (selectedContinent) {
+    filteredCountries = filteredCountries.filter(
+      (country) => country.continent === selectedContinent
+    );
+  }
+
+  const filteredByActivity = filteredCountries.filter((country) => {
+    return country.TourismActivities.some(
+      (activity) => activity.name === selectedActivity
+    );
+  });
+
+  return {
+    ...state,
+    allCountries: filteredByActivity,
+    selectedActivity: selectedActivity,
+  };
+
+        
+      
+
+  case RESET:
+    return {
+      ...state,
+      allCountries: state.countriesCopy,
+      selectedContinent: "",
+      selectedActivity: "",
+    };
 
     default:
       return state;

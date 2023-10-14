@@ -3,36 +3,32 @@ const { Country } = require("./src/db");
 
 const URL = "http://localhost:5000/countries"; 
 
-async function transferDataToDB() {
+const transferDataToDB = async () => {
   try {
-    await Country.sync();
     const { data } = await axios.get(URL);
-    
-    await Promise.all(data.map(async (country) => {
-      // Verifica si country.continents es un array con elementos
-      if (Array.isArray(country.continents) && country.continents.length > 0) {
-        const continentString = country.continents[0]; // Obtiene el primer elemento del array
-        const countryDB = {
-          ID: country.cca3,
-          name: country.name.common,
-          official_name: country.name.official,
-          flagImage: country.flags.png,
-          flagImage2: country.flags.svg,
-          continent: continentString, // Asigna la cadena al campo continent
-          capital: country.capital,
-          subregion: country.subregion,
-          area: country.area,
-          population: country.population
-        };
 
-      
-      await Country.create(countryDB);
-    }}));
-    
-    console.log("Datos transferidos correctamente a la base de datos.");
+      for (const country of data) {
+        const { cca3, name, continents, capital, subregion, area, population, flags } = country;
+
+        const [countryInstance, created] = await Country.findOrCreate({
+          where: { ID: cca3 },
+          defaults: {
+            name: name.common,
+            official_name: name.official,
+            flagImage: flags.png,
+            flagImage2: flags.svg,
+            continent: continents[0],
+            capital: capital ? capital[0] : "Unknown",
+            subregion: subregion ? subregion : "Unknown",
+            area: area,
+            population: population
+          }
+        });
+      }
+      console.log("Transfer complete ^-^ Server ready");
   } catch (error) {
-    console.error("Error al transferir datos a la base de datos:", error.message);
+    console.error("Error transfering data to database: ", error.message);
   }
-};
+}
 
-transferDataToDB();
+module.exports = transferDataToDB

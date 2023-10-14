@@ -15,7 +15,7 @@ export const validateForm = (input) => {
   } else if (/[\d]/.test(input.name)) {
     errors.name = "El nombre no debe contener números";
   } else if (input.name.trim().length < 5) {
-    errors.description = "El nombre debe contener al menos 5 caracteres";
+    errors.name = "El nombre debe contener al menos 5 caracteres";
   }
 
   if (input.description.trim() === "") {

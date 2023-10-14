@@ -50,7 +50,7 @@ export function createActivity(activity) {
     };
   }
 
-  export function getCountryActivity(countryActivity) {
+  export function getCountryActivity() {
     return async (dispatch) => {
         const result = await axios(`http://localhost:3001/countries/${ID}/activities`)
         return dispatch({

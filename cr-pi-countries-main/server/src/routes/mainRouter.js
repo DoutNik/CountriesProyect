@@ -5,9 +5,11 @@ const getCountryByNameHandler = require("../handler/getCountryByName")
 const getTourismActivitiesHandler = require("../handler/getTourismActivities")
 const postActivitiesHandler = require("../handler/postActivities")
 const getCountryActivityHandler = require("../handler/getCountryActivity")
+const deleteActivityHandler = require("../handler/deleteActivities")
 
 const router = Router();
 
+router.delete('/tourismActivities/:id', deleteActivityHandler)
 router.get('/countries', getAllCountriesHandler)
 router.get('/countries/name', getCountryByNameHandler)
 router.get('/countries/:ID', getCountryByIdHandler)

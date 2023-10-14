@@ -1,0 +1,43 @@
+button {
+    width: fit-content;
+    height: fit-content;
+    border-radius: 30em;
+    font-size: 15px;
+    font-family: inherit;
+    border: none;
+    color: #fbf8f8; 
+    font-weight: 700;
+    -webkit-text-stroke: 0.1px rgb(6, 5, 5);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 6px 6px 12px #c5c5c5,
+                -6px -6px 12px #ffffff;
+   }
+
+   button[disabled] {
+    background-color: rgba(8, 46, 31, 0.585);
+    cursor: no-drop;
+    color: rgb(73, 43, 226);
+  }
+   
+  button:not([disabled])::before {
+    content: '';
+    width: 0;
+    height: 100%;
+    position: absolute;
+    color: #080000; 
+    -webkit-text-stroke: 0.5px white;
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(to right, #0fd850 0%, #f9f047 80%);
+    transition: .5s ease;
+    display: block;
+    z-index: -1;
+}
+
+button:not([disabled]):hover::before {
+    width: 100%;
+    color: #080000; 
+    -webkit-text-stroke: 0.5px white;
+}

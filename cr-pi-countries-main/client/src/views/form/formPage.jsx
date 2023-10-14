@@ -107,7 +107,9 @@ function FormPage() {
       <div className="form-container">
         <div className="form-info-container">
           <form className="form" onSubmit={handleSubmit}>
+          
             <h2>Activity creator</h2>
+
             <div className="user-box">
               <input
                 name="name"

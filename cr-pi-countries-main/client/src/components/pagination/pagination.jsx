@@ -51,7 +51,7 @@ export const Pagination = ({ page, setPage, max }) => {
         autoComplete="off"
         value={input}
       />
-      <p> de {max}</p>
+      <p> de {Math.ceil(max)}</p>
       <button
         className="button-pagination"
         disabled={page === Math.ceil(max) || page > Math.ceil(max)}

@@ -22,21 +22,24 @@ module.exports = (sequelize) => { sequelize.define('Country', {
   },
   flagImage: {
     type: DataTypes.STRING,
+    allowNull: false
   },
   flagImage2: {
     type: DataTypes.STRING,
+    allowNull: false
   },
   continent: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
   },
   capital: {
-    type: DataTypes.ARRAY(Sequelize.STRING)
+    type: DataTypes.STRING,
   },
   subregion: {
     type: DataTypes.STRING,
   },
   area: {
     type: DataTypes.FLOAT,
+    allowNull: false
   },
   population: {
     type: DataTypes.INTEGER,
